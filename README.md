@@ -1,3 +1,0 @@
-# Mekhanik
-
-app
