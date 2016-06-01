@@ -1,0 +1,118 @@
+package com.webalexx.prj_mechanik.ui;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.webalexx.prj_mechanik.R;
+import com.webalexx.prj_mechanik.content.Constants;
+import com.webalexx.prj_mechanik.content.model.CatalogItem;
+import com.webalexx.prj_mechanik.content.model.Section;
+import com.webalexx.prj_mechanik.services.MechanicDataSource;
+import com.webalexx.prj_mechanik.ui.adapter.ListAdapter;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.subscriptions.CompositeSubscription;
+
+
+public class MainActivity extends ActionBarActivity {
+
+    private ListAdapter adapter;
+    private final CompositeSubscription subscription = new CompositeSubscription();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        adapter = new ListAdapter(this);
+        ListView listView = (ListView) findViewById(R.id.item_list);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            if (adapter.isSection(position)) {
+                startActivity(new Intent(MainActivity.this, MainActivity.class)
+                                .putExtra(Constants.ID_EXTRA, id)
+                                .putExtra(
+                                        Constants.SECTION_NAME_EXTRA,
+                                        ((Section) adapter.getItem(position)).getName()
+                                )
+                );
+            } else {
+                startActivity(
+                        new Intent(MainActivity.this, DetailActivity.class)
+                                .putExtra(
+                                        Constants.SERIALIZABLE_CATALOG_ITEM_EXTRA,
+                                        (CatalogItem) adapter.getItem(position)
+
+
+
+                                        )
+
+                );
+            }
+        });
+
+        Bundle extras = getIntent().getExtras();
+        extras = (extras != null) ? extras : new Bundle();
+        Long itemId = extras.containsKey(Constants.ID_EXTRA) ? extras.getLong(Constants.ID_EXTRA) : null;
+
+        subscription.add(MechanicDataSource.getInstance()
+                        .listSections(itemId)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(adapter::setSections, throwable -> Toast
+                                .makeText(
+                                        MainActivity.this,
+                                        Constants.LOADING_ERROR,
+                                        Toast.LENGTH_LONG
+                                ).show())
+        );
+
+        if (itemId != null) {
+            MainActivity.this.setTitle(extras.getString(Constants.SECTION_NAME_EXTRA));
+
+            subscription.add(MechanicDataSource.getInstance()
+                            .listItems(itemId)
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(adapter::setCatalogItems, throwable -> Toast
+                                    .makeText(
+                                            MainActivity.this,
+                                            Constants.LOADING_ERROR,
+                                            Toast.LENGTH_LONG
+                                    ).show())
+            );
+        }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_search) {
+            startActivity(new Intent(this, SearchActivity.class));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        subscription.unsubscribe();
+    }
+}

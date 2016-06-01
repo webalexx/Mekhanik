@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Поиск запчастей121</string>
+    <string name="offical_site_name">Механик Ульяновск</string>
+    <string name="offical_site_product_announce1">Запчасти на спецтех,</string>
+    <string name="offical_site_product_announce2">автобусы, грузовики</string>
+    <string name="title_activity_search">Поиск</string>
+    <string name="search_hint">Поиск</string>
+    <string name="no_search_results">Ничего не найдено</string>
+    <string name="call_action">Позвонить</string>
+    <string name="mail_action">E-mail</string>
+    <string name="no_mailing_app">Не найдено приложений для отправки почты</string>
+    <string name="article">Артикул</string>
+    <string name="available">На складе</string>
+    <string name="price">Стоимость</string>
+    <string name="phone">+7 (842) 22–50–777</string>
+    <string name="mail">m-mehanik@mail.ru</string>
+    <string name="action_settings">Настройки</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="button_send">Send</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="rest_server_root">http://mehanik-ulyanovsk.ru</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="currency">руб.</string>
+    <string name="mess_zero_stock">Ожидается</string>
+    <string name="loading_error">Отсутствует подключение к сети</string>
+    <string name="ID_EXTRA">ID_EXTRA</string>
+    <string name="SECTION_NAME_EXTRA">SECTION_NAME_EXTRA</string>
+    <string name="SERIALIZABLE_CATALOG_ITEM_EXTRA">SERIALIZABLE_CATALOG_ITEM_EXTRA</string>
+    <string name="ZERO_STOCK">Ожидается</string>
+    <string name="CURRENCY">руб.</string>
+    <string name="LOADING_ERROR">Ошибка во время загрузки</string>
+    <string name="SNACKBAR_ACTION_TEXT">ВКЛЮЧИТЬ</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

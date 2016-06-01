@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:layout_width="match_parent"
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_catalog_24dp"
+            android:title="Каталог" />
+        <item
+            android:layout_width="match_parent"
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Избранное" />
+        <item
+            android:layout_width="match_parent"
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Новинки(не делаем)" />
+        <item
+            android:layout_width="match_parent"
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Контакты" />
+        <!--<item-->
+            <!--android:id="@+id/nav_slideshow"-->
+            <!--android:icon="@drawable/ic_menu_slideshow"-->
+            <!--android:title="Позвонить" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_manage"-->
+            <!--android:icon="@drawable/ic_menu_manage"-->
+            <!--android:title="Tools" />-->
+    </group>
+
+    <item android:title="Разное">
+        <menu>
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Отзывы" />
+            <item
+                android:id="@+id/nav_sales"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Куплю-продам" />
+            <!--<item-->
+                <!--android:id="@+id/nav_send"-->
+                <!--android:icon="@drawable/ic_menu_send"-->
+                <!--android:title="Написать" />-->
+        </menu>
+    </item>
+
+</menu>
